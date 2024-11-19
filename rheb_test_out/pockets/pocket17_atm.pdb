@@ -1,0 +1,61 @@
+HEADER
+HEADER This is a pdb format file writen by the programm fpocket.                 
+HEADER It represents the atoms contacted by the voronoi vertices of the pocket.  
+HEADER                                                                           
+HEADER Information about the pocket    17:
+HEADER 0  - Pocket Score                      : -0.1823
+HEADER 1  - Drug Score                        : 0.0474
+HEADER 2  - Number of alpha spheres           :    61
+HEADER 3  - Mean alpha-sphere radius          : 4.1649
+HEADER 4  - Mean alpha-sphere Solvent Acc.    : 0.5062
+HEADER 5  - Mean B-factor of pocket residues  : 0.0000
+HEADER 6  - Hydrophobicity Score              : 32.9231
+HEADER 7  - Polarity Score                    :     8
+HEADER 8  - Amino Acid based volume Score     : 4.6923
+HEADER 9  - Pocket volume (Monte Carlo)       : 607.7587
+HEADER 10 - Pocket volume (convex hull)       : 103.5393
+HEADER 11 - Charge Score                      :     2
+HEADER 12 - Local hydrophobic density Score   : 33.9459
+HEADER 13 - Number of apolar alpha sphere     :    37
+HEADER 14 - Proportion of apolar alpha sphere : 0.6066
+ATOM    837   OH TYR X 231      58.940  43.800  31.420  0.17  7.50           O 0
+ATOM    799   CG GLN X 229      57.720  46.980  27.160  0.00  0.00           C 0
+ATOM    834  CE1 TYR X 231      57.080  43.990  29.920  0.00  0.00           C 0
+ATOM     52   CG LYS X 182      55.910  44.710  34.070  0.00  0.00           C 0
+ATOM    803  OE1 GLN X 229      60.160  46.550  26.860  0.52  9.64           O 0
+ATOM    802   CD GLN X 229      59.110  47.270  26.710  0.00  0.00           C 0
+ATOM     58   CE LYS X 182      53.590  45.720  34.540  0.00  0.00           C 0
+ATOM    780  ND2 ASN X 227      51.730  49.300  27.720  0.00  0.00           N 0
+ATOM    770    O VAL X 226      53.830  46.540  25.820  0.73  2.14           O 0
+ATOM    775   CB ASN X 227      53.500  49.740  26.180  0.00  0.00           C 0
+ATOM     49   CB LYS X 182      55.170  43.570  33.430  0.00  0.00           C 0
+ATOM     78    N ARG X 184      51.230  38.400  32.940  0.60  2.19           N 0
+ATOM    861    O HSD X 232      52.060  37.200  30.250  0.88  1.07           O 0
+ATOM    828   CB TYR X 231      54.800  41.180  28.570  0.00  0.00           C 0
+ATOM     69   CA SER X 183      53.450  39.260  32.460  0.00  0.00           C 0
+ATOM    832  CD1 TYR X 231      56.170  43.340  29.070  0.00  0.00           C 0
+ATOM    761  CG1 VAL X 226      50.300  46.050  26.370  0.00  0.00           C 0
+ATOM    759   CB VAL X 226      51.230  45.070  25.680  0.00  0.00           C 0
+ATOM   2663  OE2 GLU X 345      50.580  47.680  34.660  0.67  9.64           O 0
+ATOM   2662  OE1 GLU X 345      50.090  45.570  34.880  0.89  2.14           O 0
+ATOM   2594  CG2 ILE X 341      46.980  43.650  31.650  0.00  0.00           C 0
+ATOM    765  CG2 VAL X 226      50.390  43.800  25.290  0.00  0.00           C 0
+ATOM   2661   CD GLU X 345      49.730  46.790  34.710  0.00  0.00           C 0
+ATOM   2658   CG GLU X 345      48.260  47.080  34.520  0.00  0.00           C 0
+ATOM    796   CB GLN X 229      57.160  45.620  26.660  0.00  0.00           C 0
+ATOM    844    O TYR X 231      53.390  38.750  26.530  0.00  0.00           O 0
+ATOM    860    C HSD X 232      52.200  36.780  29.110  0.00  0.00           C 0
+ATOM    866   CB LEU X 233      48.650  36.940  28.300  0.00  0.00           C 0
+ATOM    732  CG1 ILE X 224      49.640  38.730  24.700  0.00  0.00           C 0
+ATOM    735   CD ILE X 224      48.230  38.990  25.260  0.00  0.00           C 0
+ATOM    726   CB ILE X 224      50.370  40.010  24.320  0.00  0.00           C 0
+ATOM    843    C TYR X 231      54.170  38.920  27.450  0.00  0.00           C 0
+ATOM    740    O ILE X 224      53.270  41.190  24.520  0.00  0.00           O 0
+ATOM     66    O LYS X 182      52.610  41.890  33.590  0.72  5.36           O 0
+ATOM    871  CD1 LEU X 233      47.210  37.430  30.320  0.00  0.00           C 0
+ATOM   2601   CD ILE X 341      46.260  41.100  30.020  0.00  0.00           C 0
+ATOM     85   CG ARG X 184      49.320  40.360  34.250  0.00  0.00           C 0
+ATOM   2620  CD2 LEU X 342      44.980  48.880  31.810  0.00  0.00           C 0
+ATOM     82   CB ARG X 184      48.940  38.940  33.780  0.00  0.00           C 0
+TER
+END

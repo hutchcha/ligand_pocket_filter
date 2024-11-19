@@ -1,0 +1,36 @@
+HEADER
+HEADER This is a pdb format file writen by the programm fpocket.                 
+HEADER It represents the atoms contacted by the voronoi vertices of the pocket.  
+HEADER                                                                           
+HEADER Information about the pocket     9:
+HEADER 0  - Pocket Score                      : -0.0637
+HEADER 1  - Drug Score                        : 0.0001
+HEADER 2  - Number of alpha spheres           :    16
+HEADER 3  - Mean alpha-sphere radius          : 3.9632
+HEADER 4  - Mean alpha-sphere Solvent Acc.    : 0.6748
+HEADER 5  - Mean B-factor of pocket residues  : 0.0000
+HEADER 6  - Hydrophobicity Score              : 11.0000
+HEADER 7  - Polarity Score                    :     3
+HEADER 8  - Amino Acid based volume Score     : 4.5000
+HEADER 9  - Pocket volume (Monte Carlo)       : 238.3181
+HEADER 10 - Pocket volume (convex hull)       : 3.5464
+HEADER 11 - Charge Score                      :     0
+HEADER 12 - Local hydrophobic density Score   : 1.0000
+HEADER 13 - Number of apolar alpha sphere     :     2
+HEADER 14 - Proportion of apolar alpha sphere : 0.1250
+ATOM   2008   CA ARG X 304      17.950  36.880  28.350  0.00  0.00           C 0
+ATOM   2005    O GLU X 303      17.290  36.300  25.700  0.82  2.14           O 0
+ATOM   2002  OE1 GLU X 303      11.970  36.770  27.440  0.00  0.00           O 0
+ATOM   1998   CG GLU X 303      13.960  37.860  26.830  0.00  0.00           C 0
+ATOM   2006    N ARG X 304      17.100  37.660  27.480  0.78  1.09           N 0
+ATOM   2032   CA VAL X 305      17.220  35.570  31.760  0.00  0.00           C 0
+ATOM   2029    O ARG X 304      16.930  37.850  30.420  0.00  0.00           O 0
+ATOM   2040  CG2 VAL X 305      16.010  33.770  32.860  0.00  0.00           C 0
+ATOM   2028    C ARG X 304      17.520  36.890  29.810  0.00  0.00           C 0
+ATOM   2034   CB VAL X 305      17.180  34.110  31.980  0.00  0.00           C 0
+ATOM   2030    N VAL X 305      17.800  35.810  30.520  0.87  2.19           N 0
+ATOM   1375    O THR X 265      19.440  31.330  30.420  0.00  0.00           O 0
+ATOM   1370  CG2 THR X 265      20.290  33.460  26.860  0.00  0.00           C 0
+ATOM   2045    O VAL X 305      17.160  36.730  33.950  0.00  0.00           O 0
+TER
+END

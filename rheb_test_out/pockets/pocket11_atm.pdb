@@ -1,0 +1,36 @@
+HEADER
+HEADER This is a pdb format file writen by the programm fpocket.                 
+HEADER It represents the atoms contacted by the voronoi vertices of the pocket.  
+HEADER                                                                           
+HEADER Information about the pocket    11:
+HEADER 0  - Pocket Score                      : -0.0885
+HEADER 1  - Drug Score                        : 0.0000
+HEADER 2  - Number of alpha spheres           :    15
+HEADER 3  - Mean alpha-sphere radius          : 3.9835
+HEADER 4  - Mean alpha-sphere Solvent Acc.    : 0.6105
+HEADER 5  - Mean B-factor of pocket residues  : 0.0000
+HEADER 6  - Hydrophobicity Score              : -7.6000
+HEADER 7  - Polarity Score                    :     3
+HEADER 8  - Amino Acid based volume Score     : 3.4000
+HEADER 9  - Pocket volume (Monte Carlo)       : 236.6927
+HEADER 10 - Pocket volume (convex hull)       : 5.5698
+HEADER 11 - Charge Score                      :     0
+HEADER 12 - Local hydrophobic density Score   : 0.0000
+HEADER 13 - Number of apolar alpha sphere     :     0
+HEADER 14 - Proportion of apolar alpha sphere : 0.0000
+ATOM    988  NE2 GLN X 241      34.540  18.540  40.610  0.00  0.00           N 0
+ATOM   1000   CG ASP X 242      28.200  18.060  38.970  0.00  0.00           C 0
+ATOM   1002  OD2 ASP X 242      28.300  16.950  38.400  0.00  0.00           O 0
+ATOM    993    N ASP X 242      30.090  19.620  41.190  0.55  1.09           N 0
+ATOM    226   CG ARG X 192      31.540  21.880  34.000  0.00  0.00           C 0
+ATOM    975    O GLY X 240      32.390  21.980  38.420  0.67  7.50           O 0
+ATOM   1001  OD1 ASP X 242      28.130  19.110  38.310  0.39  5.36           O 0
+ATOM    235  NH1 ARG X 192      32.820  19.400  32.500  0.00  0.00           N 0
+ATOM    967    C ALA X 239      35.440  24.350  37.760  0.00  0.00           C 0
+ATOM    963   CB ALA X 239      35.130  24.070  35.260  0.00  0.00           C 0
+ATOM    968    O ALA X 239      36.310  23.940  38.580  0.45  7.50           O 0
+ATOM    978   CA GLN X 241      32.270  20.710  41.010  0.00  0.00           C 0
+ATOM    987  OE1 GLN X 241      35.840  20.330  41.170  0.69  3.21           O 0
+ATOM    229   CD ARG X 192      33.040  22.190  33.520  0.00  0.00           C 0
+TER
+END

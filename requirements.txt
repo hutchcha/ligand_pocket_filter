@@ -1,0 +1,8 @@
+biopython
+freesasa
+mdanalysis
+pymol
+mordred
+rdkit
+pyvol
+
