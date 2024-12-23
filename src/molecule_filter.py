@@ -26,7 +26,10 @@ class MoleculeFilter:
                  hbd_range: Tuple[int, int] = (0, 5),
                  tpsa_range: Tuple[float, float] = (60, 560),
                  rotb_range: Tuple[int, int] = (0, 15),
-                 drug_score_range: Tuple[float, float] = (0.5, 1)
+                 drug_score_range: Tuple[float, float] = (0.5, 1),
+                 # New: include logP and aromatic ring filters
+                 logp_range: Tuple[float, float] = (-5, 5),
+                 aromatic_ring_range: Tuple[int, int] = (0, 5)
                 ):
         """
         Initialize the MoleculeFilter with specified thresholds.
@@ -37,6 +40,10 @@ class MoleculeFilter:
         self.tpsa_min, self.tpsa_max = tpsa_range
         self.rotb_min, self.rotb_max = rotb_range
         self.drug_score_min, self.drug_score_max = drug_score_range
+        
+        # New: store logP and aromatic ring cutoff ranges
+        self.logp_min, self.logp_max = logp_range
+        self.arom_ring_min, self.arom_ring_max = aromatic_ring_range
 
     def calculate_drug_score(self, mol: Chem.Mol) -> float:
         """
@@ -59,7 +66,10 @@ class MoleculeFilter:
             'HBD': Descriptors.NumHDonors(mol),
             'TPSA': rdMolDescriptors.CalcTPSA(mol),
             'RotatableBonds': Descriptors.NumRotatableBonds(mol),
-            'DrugScore': self.calculate_drug_score(mol)
+            'DrugScore': self.calculate_drug_score(mol),
+            # New: compute LogP and # of aromatic rings
+            'LogP': Descriptors.MolLogP(mol),
+            'NumAromaticRings': rdMolDescriptors.CalcNumAromaticRings(mol)
         }
         return descriptors
     
@@ -89,6 +99,12 @@ class MoleculeFilter:
         if not (self.rotb_min <= d['RotatableBonds'] <= self.rotb_max):
             return False, d
         if not (self.drug_score_min <= d['DrugScore'] <= self.drug_score_max):
+            return False, d
+        
+        # New: apply logP and aromatic ring filters
+        if not (self.logp_min <= d['LogP'] <= self.logp_max):
+            return False, d
+        if not (self.arom_ring_min <= d['NumAromaticRings'] <= self.arom_ring_max):
             return False, d
         
         return True, d
@@ -156,13 +172,34 @@ def parse_arguments():
         "--drugscore_max", type=float, default=1,
         help="Maximum drug score (QED) (default: 1)."
     )
+    
+    # New: arguments for LogP range
+    parser.add_argument(
+        "--logp_min", type=float, default=-5,
+        help="Minimum LogP (default: -5)."
+    )
+    parser.add_argument(
+        "--logp_max", type=float, default=5,
+        help="Maximum LogP (default: 5)."
+    )
+    
+    # New: arguments for aromatic ring range
+    parser.add_argument(
+        "--arom_ring_min", type=int, default=0,
+        help="Minimum number of aromatic rings (default: 0)."
+    )
+    parser.add_argument(
+        "--arom_ring_max", type=int, default=5,
+        help="Maximum number of aromatic rings (default: 5)."
+    )
+
     parser.add_argument(
         "--max_count", type=int, default=None,
         help="Optional maximum number of molecules to process/keep overall."
     )
     parser.add_argument(
         "--per_file_limit", type=int, default=10000,
-        help="Maximum number of molecules to select from each file (default: 1000)."
+        help="Maximum number of molecules to select from each file (default: 10000)."
     )
     parser.add_argument(
         "--num_processes", type=int, default=4,
@@ -173,8 +210,8 @@ def parse_arguments():
         help="Interval in seconds to print progress updates (default: 10)."
     )
     parser.add_argument(
-    "--random_seed", type=int, default=None,
-    help="Optional random seed for reproducibility. If not set, shuffle is random each run."
+        "--random_seed", type=int, default=None,
+        help="Optional random seed for reproducibility. If not set, shuffle is random each run."
     )
     return parser.parse_args()
 
@@ -226,17 +263,24 @@ def process_files(args_tuple):
     logging.info(f"Worker started. Handling {len(files)} files.")
     logging.info(f"Files: {files}")
 
+    # Instantiate the filter object
     filter_obj = MoleculeFilter(
         mw_range=(filter_params['mw_min'], filter_params['mw_max']),
         hba_range=(filter_params['hba_min'], filter_params['hba_max']),
         hbd_range=(filter_params['hbd_min'], filter_params['hbd_max']),
         tpsa_range=(filter_params['tpsa_min'], filter_params['tpsa_max']),
         rotb_range=(filter_params['rotb_min'], filter_params['rotb_max']),
-        drug_score_range=(filter_params['drugscore_min'], filter_params['drugscore_max'])
+        drug_score_range=(filter_params['drugscore_min'], filter_params['drugscore_max']),
+        # Pass new filters to MoleculeFilter
+        logp_range=(filter_params['logp_min'], filter_params['logp_max']),
+        aromatic_ring_range=(filter_params['arom_ring_min'], filter_params['arom_ring_max'])
     )
     
-    fieldnames = ['SMILES', 'ID', 'MolecularWeight', 'HBA', 'HBD', 'TPSA',
-                  'RotatableBonds', 'DrugScore']
+    # Extended fieldnames for new descriptors
+    fieldnames = [
+        'SMILES', 'ID', 'MolecularWeight', 'HBA', 'HBD', 'TPSA',
+        'RotatableBonds', 'DrugScore', 'LogP', 'NumAromaticRings'
+    ]
     
     try:
         with open(output_path, 'w', newline='') as csvfile:
@@ -283,7 +327,9 @@ def process_files(args_tuple):
                                 'HBD': descriptors['HBD'],
                                 'TPSA': descriptors['TPSA'],
                                 'RotatableBonds': descriptors['RotatableBonds'],
-                                'DrugScore': descriptors['DrugScore']
+                                'DrugScore': descriptors['DrugScore'],
+                                'LogP': descriptors['LogP'],
+                                'NumAromaticRings': descriptors['NumAromaticRings']
                             }
                             writer.writerow(molecule_data)
                             file_passed += 1
@@ -339,14 +385,25 @@ def main():
         'hbd_min': args.hbd_min, 'hbd_max': args.hbd_max,
         'tpsa_min': args.tpsa_min, 'tpsa_max': args.tpsa_max,
         'rotb_min': args.rotb_min, 'rotb_max': args.rotb_max,
-        'drugscore_min': args.drugscore_min, 'drugscore_max': args.drugscore_max
+        'drugscore_min': args.drugscore_min, 'drugscore_max': args.drugscore_max,
+        # Pass new filters into the process pool
+        'logp_min': args.logp_min, 'logp_max': args.logp_max,
+        'arom_ring_min': args.arom_ring_min, 'arom_ring_max': args.arom_ring_max
     }
     
     # Temporary output files for each process
     temp_files = [f"{args.output}.part{i}" for i in range(args.num_processes)]
     
     process_args = [
-        (file_chunks[i], filter_params, temp_files[i], args.max_count, passed_count, increment_lock, args.per_file_limit)
+        (
+            file_chunks[i],
+            filter_params,
+            temp_files[i],
+            args.max_count,
+            passed_count,
+            increment_lock,
+            args.per_file_limit
+        )
         for i in range(args.num_processes)
     ]
     
@@ -373,8 +430,10 @@ def main():
     
     # Merge partial files
     if final_count > 0:
-        fieldnames = ['SMILES', 'ID', 'MolecularWeight', 'HBA', 'HBD', 'TPSA',
-                      'RotatableBonds', 'DrugScore']
+        fieldnames = [
+            'SMILES', 'ID', 'MolecularWeight', 'HBA', 'HBD', 'TPSA',
+            'RotatableBonds', 'DrugScore', 'LogP', 'NumAromaticRings'
+        ]
         
         with open(args.output, 'w', newline='') as outfile:
             writer = csv.DictWriter(outfile, fieldnames=fieldnames)
